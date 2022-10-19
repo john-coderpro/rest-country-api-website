@@ -1,0 +1,74 @@
+@use '../abstracts/mixins' as *;
+
+.visually-hidden {
+    position: absolute;
+    left: -3000px;
+}
+
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.hide {
+    display: none;
+}
+
+/* the following animations are the same with different delays ,they will be assigned to cards with respect to their distance to the left side of the screen, this will ensure good animation no matter the device width */
+
+.animate-card-3 {
+    animation: animate 300ms ease  1 normal forwards;
+}
+
+.animate-card-2 {
+    animation: animate 300ms ease  1 normal forwards;
+}
+
+.animate-card-1 {
+    animation: animate 300ms ease  1 normal forwards;
+}
+
+.animate-card-0 {
+    animation: animate 300ms ease  1 normal forwards;
+}
+
+@include media(small) {
+    .animate-card-3 {
+        animation: animate 300ms ease 150ms 1 normal forwards;
+    }
+}
+@include media(medium) {
+    .animate-card-3 {
+        animation: animate 300ms ease 300ms 1 normal forwards;
+    }
+
+    .animate-card-2 {
+        animation: animate 300ms ease 150ms 1 normal forwards;
+    }
+}
+
+@include media(large) {
+    .animate-card-3 {
+        animation: animate 300ms ease 450ms 1 normal forwards;
+    }
+
+    .animate-card-2 {
+        animation: animate 300ms ease 300ms 1 normal forwards;
+    }
+
+    .animate-card-1 {
+        animation: animate 300ms ease 150ms 1 normal forwards;
+    }
+}
+
+@keyframes animate {
+    0% {
+        transform: translateX(-3000px);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

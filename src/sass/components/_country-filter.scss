@@ -1,0 +1,44 @@
+@use '../abstracts/mixins' as *;
+@use '../base/costum-properties' as *;
+
+// the width of the country filter is the same as the button
+// I looked in the broweser devtools to take it;
+
+.country-filter {
+    position: relative;
+    padding-bottom: 20px;
+    width: 175px;
+}
+@include media(medium) {
+     .country-filter {
+        padding-bottom: 0;
+     }
+}
+
+.regions {
+    @include shaping(100%, auto);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50px;
+    background-color: var(--elements-bg-color);
+    padding: 10px 0;
+
+    & > * {
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        &.active {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    &.isclosed {
+        display: none;
+    }
+}

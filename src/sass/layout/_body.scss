@@ -1,0 +1,5 @@
+@use '../base/costum-properties' as *;
+
+body {
+    background-color: var(--body-bg-color);
+}

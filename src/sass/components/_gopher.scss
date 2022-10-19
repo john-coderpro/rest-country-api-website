@@ -1,0 +1,89 @@
+@use '../abstracts/mixins' as *;
+
+.gopher {
+    position: absolute;
+    z-index: -100;
+    bottom: 25px;
+    transition: transform 0.5s;
+    display: none;
+}
+
+.gopher-proximity-hover {
+    position: absolute;
+    z-index: -50;
+    bottom: 35px;
+    left: -5px;
+    width: 90px;
+    height: 90px;
+    user-select: none;
+    border-radius: 50%;
+    background: transparent;
+    display: none;
+
+    &:hover ~ .gopher {
+        transform: translateY(20px);
+    }
+}
+
+.eye-socket {
+    position: absolute;
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 100%);
+}
+
+.eye-socket.left {
+    width: 26px;
+    height: 25px;
+    top: 18px;
+    left: 15px;
+}
+
+.eye-socket.right {
+    top: 20px;
+    left: 48px;
+    width: 18px;
+    height: 23px;
+}
+
+.eye {
+    position: absolute;
+    bottom: 3px;
+    right: 2px;
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+
+    &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        z-index: 0;
+        top: 1px;
+        left: 5px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: hsl(240, 8%, 9%);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        z-index: 1;
+        top: 2px;
+        left: 9px;
+        width: 1.5px;
+        height: 1.5px;
+        background: hsl(0, 0%, 100%);
+        border-radius: 50%;
+    }
+}
+
+@include media(large) {
+    .gopher,
+    .gopher-proximity-hover {
+        display: block;
+    }
+}

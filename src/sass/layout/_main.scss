@@ -1,0 +1,21 @@
+@use '../abstracts/mixins' as *;
+
+.main {
+    @include flexy;
+
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 270px;
+    max-width: 1200px;
+    width: 90vw;
+
+}
+
+@supports(display: grid) {
+    .main {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}

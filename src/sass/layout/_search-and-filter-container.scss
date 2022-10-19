@@ -1,0 +1,29 @@
+@use '../abstracts/mixins' as *;
+
+.search-and-filter-container {
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    max-width: 1220px;
+    min-height: 100px;
+    padding: 10px;
+    position: fixed;
+    top: 50px;
+    width: 100vw;
+    z-index: 1;
+}
+
+@include media(medium) {
+    .search-and-filter-container {
+        align-items: flex-end;
+        min-height: 150px;
+        flex-direction: row;
+        width: 95vw;
+        left: 50%;
+        transform: translateX(-50%);
+        justify-content: space-between;
+        top: 70px;
+        
+    }
+}

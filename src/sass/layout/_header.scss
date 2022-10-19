@@ -1,0 +1,28 @@
+@use '../abstracts/mixins' as *;
+@use '../base/costum-properties' as *;
+
+.header {
+    width: 100vw;
+    height: 50px;
+    @include flexy;
+
+    background-color: var(--elements-bg-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    &__sub-container {
+        @include flexy;
+
+        width: 90vw;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+@include media(medium) {
+    .header {
+        height: 70px;
+    }
+}

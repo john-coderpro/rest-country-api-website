@@ -1,0 +1,48 @@
+@use '../abstracts/mixins' as *;
+@use '../base/costum-properties' as *;
+
+.search-input {
+    @include flexy;
+    @include shaping(min(400px, 80vw), 50px);
+
+    background-color: var(--elements-bg-color);
+    padding-left: 10px;
+    margin-bottom: 20px;
+
+    & > svg {
+        margin-left: 10px;
+        width: 24px;
+        height: 24px;
+    }
+
+    & > label {
+        text-align: left;
+        width: min(250px,70vw);
+        margin-left: 10px;
+    }
+}
+
+@include media(medium) {
+    .search-input {
+        margin-bottom: 0;
+        align-self: auto;
+    }
+}
+
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+    display: none;
+}
+
+input[type='search'] {
+    all: unset;
+    appearance: none;
+    width: 10px;
+}
+
+.search-input.isfocused {
+    box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px inset,
+        rgba(0, 0, 0, 0.3) 0 18px 36px -18px inset;
+}

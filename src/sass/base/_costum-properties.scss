@@ -1,0 +1,13 @@
+:root.light {
+    --body-bg-color: hsl(0 0% 98%);
+    --elements-bg-color: hsl(0 0% 100%);
+    --text-color: hsl(200 15% 8%);
+    --input-text: hsl(0 0% 52%);
+}
+
+:root.dark {
+    --body-bg-color:hsl(209, 26%, 17%);
+    --elements-bg-color: hsl(209 23% 22%);
+    --text-color: hsl(0 0% 100%);
+    --input-text: hsl(0 0% 52%);
+}

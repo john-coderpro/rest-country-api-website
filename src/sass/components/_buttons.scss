@@ -1,0 +1,74 @@
+@use '../abstracts/mixins' as *;
+@use '../base/costum-properties' as *;
+
+.button {
+    & > span {
+        @include flexy;
+
+        width: 100%;
+    }
+
+    all: unset;
+    padding: 8px 16px;
+
+    &:hover {
+        cursor: pointer;
+        color: hsl(0, 0%, 50%);
+    }
+
+    &:focus {
+        border: 1px solid hsl(38, 79%, 52%);
+    }
+}
+
+.button--toggle-theme {
+    svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+}
+
+.button--filter-region {
+    @include shaping(auto, auto);
+
+    background-color: var(--elements-bg-color);
+
+    svg {
+        width: 16px;
+        height: 16px;
+        margin-left: 20px;
+    }
+}
+
+.button--select-region {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    padding: 3px 0;
+    padding-left: 25px;
+}
+
+.button--back {
+    align-self: flex-start;
+    margin-bottom: 50px;
+    background-color: var(--elements-bg-color);
+    padding: 5px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+    svg {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
+}
+
+.button--country {
+    margin-left: 5px;
+    margin-bottom: 10px;
+    background-color: var(--elements-bg-color);
+    padding: 5px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+}

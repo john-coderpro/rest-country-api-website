@@ -1,0 +1,48 @@
+{
+    "name": "rest-country-api-website",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "scripts": {
+        "bundle": "webpack-dev-server --config webpack.dev.config.js --open",
+        "build": "webpack --config webpack.prod.config.js",
+        "stylelint-check": "stylelint-config-prettier-check",
+        "stylelint": "npx stylelint **/*.scss --fix"
+    },
+    "keywords": [],
+    "browserslist": [
+        "defaults and supports es6-module"
+    ],
+    "noImplicitAny": false,
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@principalstudio/html-webpack-inject-preload": "^1.2.7",
+        "autoprefixer": "^10.4.12",
+        "browserlist": "^1.0.1",
+        "clean-webpack-plugin": "^4.0.0",
+        "css-loader": "^6.7.1",
+        "eslint": "^8.24.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "html-loader": "^4.2.0",
+        "html-webpack-plugin": "^5.5.0",
+        "mini-css-extract-plugin": "^2.6.1",
+        "postcss-combine-duplicated-selectors": "^10.0.3",
+        "postcss-loader": "^7.0.1",
+        "prettier": "2.7.1",
+        "sass": "^1.55.0",
+        "sass-loader": "^13.0.2",
+        "style-loader": "^3.3.1",
+        "stylelint": "^14.13.0",
+        "stylelint-config-prettier": "^9.0.3",
+        "stylelint-config-standard-scss": "^5.0.0",
+        "stylelint-scss": "^4.3.0",
+        "webpack": "^5.74.0",
+        "webpack-bundle-analyzer": "^4.6.1",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.11.1",
+        "webpack-merge": "^5.8.0"
+    }
+}

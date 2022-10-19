@@ -1,0 +1,30 @@
+$breakpoints: (
+    small: 500px,
+    medium: 750px,
+    large: 1100px
+);
+
+@mixin shaping($width, $height) {
+    width: $width;
+    height: $height;
+    border-radius: 5px;
+}
+
+@mixin flexy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin media($size-keyword) {
+    $screen-size: map-get($breakpoints, $size-keyword);
+    @media only screen and (min-width: $screen-size) {
+        @content;
+    }
+}
+
+@mixin reduced-motion {
+    @media (prefers-reduced-motion) {
+        @content;
+    }
+}
