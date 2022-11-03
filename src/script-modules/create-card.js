@@ -9,13 +9,12 @@ const getAllNameTranslations = function(nameTranslationObject, initialName) {
     }
     return nameWithAllTranslations
 }
-export const createCard = function createCountryCard(objetData) {
+const createCard = function createCountryCard(objetData) {
     const card = document.createElement('div')
+    
     card.addEventListener('click', helpers.debounce(displayAllInformation, 100, card))
     card.classList.add('country-card')
     card.setAttribute('tabindex', '0')
-    card.setAttribute('data-region', `${objetData.region}`)
-    card.setAttribute('data-name', `${getAllNameTranslations(objetData.translations, objetData.name.common)}`)
     const populattion = helpers.makeNumberLegible(objetData.population)
     card.innerHTML = `
                             <img src=${objetData.flags.svg} class='flag' alt='${objetData.name.common} flag'>
@@ -36,4 +35,10 @@ export const createCard = function createCountryCard(objetData) {
                             </ul>
                             `
     return card
+}
+
+
+export { 
+    createCard,
+    getAllNameTranslations
 }

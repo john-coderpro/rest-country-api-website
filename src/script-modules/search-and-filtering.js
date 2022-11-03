@@ -1,4 +1,36 @@
 import { helpers } from './helpers'
+import { initApp } from './populate-main'
+import { createCard } from './create-card'
+import {  startObservation} from './populate-main'
+
+// the goal of this generator function is to avoid excessive dom size
+// its implementation here is different from the one found in the
+// populate-main file but they've got the same name because they basically
+// do the same thing. this function , with the help of an intersection observer
+// will help generating ten cards at the time and adding more cards 
+// only and only if the user scrolls up to the last card
+
+const generateCardsProgressively = function* (countriesData, regionToDisplay) {
+
+    const main = document.querySelector('.main')
+    helpers.voidNode(main)
+    let countCards = 0
+    let i = 0
+    while (i < countriesData.length) {
+        if ( countriesData[i].region === regionToDisplay) {
+            const card = createCard(countriesData[i])
+            card.setAttribute('data-id', i)
+            main.appendChild(card)
+            countCards++
+        }
+        
+        if (countCards % 10 === 0 && countCards > 0) {
+            yield countCards
+        }
+        i++
+    }
+}
+
 
 const filterCountriesByRegion = function () {
     document.querySelector('.button--filter-region').click()
@@ -8,40 +40,46 @@ const filterCountriesByRegion = function () {
             region.classList.remove('active')
         }
     })
-    const countries = document.querySelectorAll('.country-card')
-    countries.forEach((country) => {
-        if (country.dataset.region !== this.dataset.region) {
-            country.classList.add('hide')
+    const countries = JSON.parse(localStorage.getItem('data'))
+    const generateMoreCards = generateCardsProgressively(countries, this.dataset.region)
+    const currentLastCardIndex = generateMoreCards.next().value
+    const currentLastCard = document.querySelector(`.main > .country-card:nth-child(${currentLastCardIndex}`)
+    const intersectionObserverForCardAddition = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    startObservation(
+                        generateMoreCards,
+                        intersectionObserverForCardAddition,
+                        entry.target
+                    )
+                }
+            })
         }
-        if (
-            country.dataset.region === this.dataset.region &&
-            country.classList.contains('hide')
-        ) {
-            country.classList.remove('hide')
-        }
-    })
+    )
+    intersectionObserverForCardAddition.observe(currentLastCard)
+
     this.classList.add('active')
 }
 
 
 const filterCountriesByName = function () {
-    const countries = document.querySelectorAll('.country-card')
+    const countries = JSON.parse(localStorage.getItem('data'))
     const valueToSearchFor = this.value.toLowerCase()
-    countries.forEach((country) => {
-        const countryName = country.dataset.name.toLowerCase()
-        if (
-            !countryName.includes(valueToSearchFor) &&
-            !country.classList.contains('hide')
-        ) {
-            country.classList.add('hide')
-        }
-        if (
-            countryName.includes(valueToSearchFor) &&
-            country.classList.contains('hide')
-        ) {
-            country.classList.remove('hide')
-        }
-    })
+    if ( valueToSearchFor === '') initApp()
+    else {
+        const main = document.querySelector('.main')
+        helpers.voidNode(main)
+        countries.forEach((elememt,index) => {
+            const name = elememt.translatedNames.toLowerCase()
+            if (name.includes(valueToSearchFor)) {
+                const card = createCard(elememt)
+                card.setAttribute('data-id', index)
+                main.appendChild(card)
+            }
+        })
+    }
+    
 }
 
 
@@ -59,11 +97,7 @@ export const initSearchAndFiltering = function () {
                 region.classList.remove('active')
             }
         })
-        const countries = document.querySelectorAll('.country-card')
-        countries.forEach((country) => {
-            if (country.classList.contains('hide'))
-                country.classList.remove('hide')
-        })
+        initApp()
         displayAllCountriesBtn.classList.add('active')
     })
 

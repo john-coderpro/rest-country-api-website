@@ -1,22 +1,21 @@
+import { getAllNameTranslations } from './create-card'
+
 const getBordersNames = function (arrayOfBordersCca3Codes, countries) {
-    if (arrayOfBordersCca3Codes) {
-        const borders = countries.filter(country => 
-            arrayOfBordersCca3Codes.includes(country.cca3)
-        )
-        return  borders.reduce((arrayOfBordersNames, currentObject) => {
-            arrayOfBordersNames.push(currentObject.name.common)
-            return arrayOfBordersNames
-        }, [])
-    } else {
-        return null
-    }
-    
+    if (arrayOfBordersCca3Codes) 
+        return countries
+            .filter((country) => arrayOfBordersCca3Codes.includes(country.cca3))
+            .reduce(
+                (arrayOfBordersNames, currentObject) =>
+                    arrayOfBordersNames.concat(currentObject.name.common),
+                []
+            )
+    else return null
 }
 
-export const storeData =  function storeCountriesData(data) {
-
+export const storeData = function storeCountriesData(data) {
     const dataSimplifiedForm = data.reduce((simplifiedArray, element) => {
         simplifiedArray.push({
+            translatedNames: getAllNameTranslations(element.translations, element.name.common),
             name: element.name,
             area: element.area,
             tld: element.tld,
@@ -31,5 +30,5 @@ export const storeData =  function storeCountriesData(data) {
         })
         return simplifiedArray
     }, [])
-    sessionStorage.setItem('data', JSON.stringify(dataSimplifiedForm))
+    localStorage.setItem('data', JSON.stringify(dataSimplifiedForm))
 }

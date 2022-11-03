@@ -2,12 +2,13 @@ import { helpers } from './helpers'
 
 const getHtmlTextForBorders = function (arrayOfBorders) {
     if (!arrayOfBorders) return ''
-    return arrayOfBorders.reduce((finalText, currentBorder) => {
-        console.log(finalText)
-        return finalText.concat(
-            `<button data-name=${currentBorder} class='button button--country'>${currentBorder}</button>`
-        )
-    }, '')
+    return arrayOfBorders.reduce(
+        (finalText, currentBorder) =>
+            finalText.concat(
+                `<button data-name=${currentBorder} class='button button--country'>${currentBorder}</button>`
+            ),
+        ''
+    )
 }
 const getCountrySpokenLanguages = function (LanguagesObject) {
     return Object.values(LanguagesObject).reduce(
@@ -125,23 +126,31 @@ const createCardFullDisplay = function (objetData) {
         bordersCountriesBtns.forEach((element) => {
             element.addEventListener('click', (e) => {
                 const countryName = e.target.dataset.name
-                const countriesCards =
-                    document.querySelectorAll('.country-card')
-                for (let i =0; i < countriesCards.length; i++) {
-                    if ( countriesCards[i].dataset.name.includes(countryName)) {
-                        backBtn.click()
-                        countriesCards[i].click()
-                        break
-                    }
+
+                // the following regex matches the country name at the very first position
+
+                const regex = new RegExp(`^${countryName}`, 'i')
+                const countries = JSON.parse(localStorage.getItem('data'))
+                console.log(countries)
+                backBtn.click()
+                const countryToDisplayInfos = countries.find(element => regex.test(element.translatedNames))
+
+                const main = document.querySelector('main')
+                const filterAndSearchContainer = document.querySelector(
+                    '.search-and-filter-container'
+                )
+                if (!main.classList.contains('hide')) {
+                    main.classList.add('hide')
+                    filterAndSearchContainer.classList.add('hide')
                 }
-                
+                createCardFullDisplay(countryToDisplayInfos) 
             })
         })
     }
 }
 
 export const displayAllInformation = function () {
-    const cardId = this.dataset.id
+    const cardId = parseInt(this.dataset.id)
     const main = document.querySelector('main')
     const filterAndSearchContainer = document.querySelector(
         '.search-and-filter-container'
@@ -150,6 +159,6 @@ export const displayAllInformation = function () {
         main.classList.add('hide')
         filterAndSearchContainer.classList.add('hide')
     }
-    const cardInfos = JSON.parse(sessionStorage.getItem('data'))[cardId]
+    const cardInfos = JSON.parse(localStorage.getItem('data'))[cardId]
     createCardFullDisplay(cardInfos)
 }
