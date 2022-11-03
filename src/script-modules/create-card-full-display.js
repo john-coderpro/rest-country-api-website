@@ -131,7 +131,6 @@ const createCardFullDisplay = function (objetData) {
 
                 const regex = new RegExp(`^${countryName}`, 'i')
                 const countries = JSON.parse(localStorage.getItem('data'))
-                console.log(countries)
                 backBtn.click()
                 const countryToDisplayInfos = countries.find(element => regex.test(element.translatedNames))
 
