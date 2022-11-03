@@ -2,22 +2,21 @@
 @use '../base/costum-properties' as *;
 
 .header {
-    width: 100vw;
-    height: 50px;
-    @include flexy;
-
     background-color: var(--elements-bg-color);
+    height: 50px;
+    left: 0;
     position: fixed;
     top: 0;
-    left: 0;
+    width: 100vw;
     z-index: 1;
+    @include flexy;
 
     &__sub-container {
         @include flexy;
 
-        width: 90vw;
-        max-width: 1200px;
         margin: 0 auto;
+        max-width: 1200px;
+        width: 90vw;
     }
 }
 

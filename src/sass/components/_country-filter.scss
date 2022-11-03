@@ -5,8 +5,8 @@
 // I looked in the broweser devtools to take it;
 
 .country-filter {
-    position: relative;
     padding-bottom: 20px;
+    position: relative;
     width: 175px;
 }
 @include media(medium) {
@@ -18,14 +18,14 @@
 .regions {
     @include shaping(100%, auto);
 
+    align-items: center;
+    background-color: var(--elements-bg-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 10px 0;
     position: absolute;
     top: 50px;
-    background-color: var(--elements-bg-color);
-    padding: 10px 0;
 
     & > * {
         &:hover {

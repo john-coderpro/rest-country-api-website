@@ -1,8 +1,8 @@
 @use '../abstracts/mixins' as *;
 
 .visually-hidden {
-    position: absolute;
     left: -3000px;
+    position: absolute;
 }
 
 .rotate-180 {
@@ -62,13 +62,13 @@
 
 @keyframes animate {
     0% {
-        transform: translateX(-3000px);
-        opacity: 0;
         filter: blur(10px);
+        opacity: 0;
+        transform: translateX(-3000px);
     }
 
     100% {
-        transform: translateX(0);
         opacity: 1;
+        transform: translateX(0);
     }
 }

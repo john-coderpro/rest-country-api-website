@@ -5,21 +5,20 @@
     @include shaping(250px, auto);
 
     background-color: var(--elements-bg-color);
-    padding-top: 0;
-    text-align: left;
-    min-height: 300px;
     box-shadow: rgba(0, 0, 0, 0.2) 0 3px 12px;
     flex: 1 0 auto;
-    width: 250px;
-    max-width: 300px;
     margin-left: auto;
     margin-right: auto;
+    max-width: 300px;
+    min-height: 300px;
     opacity: 0;
+    padding-top: 0;
+    text-align: left;
 
     ul > li {
-        width: 100%;
         justify-content: space-around;
         list-style: none;
+        width: 100%;
         
         &:first-child {
             margin-bottom: 10px;
@@ -31,13 +30,13 @@
     }
 
     & > *:not(:first-child) {
-        padding-left: 10px;
         margin-top: 3px;
+        padding-left: 10px;
     }
 
     &:hover {
-        transform: scale(1.05);
         cursor: pointer;
+        transform: scale(1.05);
     }
 
     &:focus {
@@ -48,17 +47,17 @@
 }
 
 .flag {
-    width: 100%;
+    border-radius: 5px 5px 0 0;
     height: 100px;
     object-fit: cover;
-    border-radius: 5px 5px 0 0;
+    width: 100%;
 }
 
 @supports (display: grid) {
     .country-card {
-        width: auto;
-        max-width: none;
         margin-left: 0;
         margin-right: 0;
+        max-width: none;
+        width: auto;
     }
 }

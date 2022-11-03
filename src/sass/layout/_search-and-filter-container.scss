@@ -17,13 +17,13 @@
 @include media(medium) {
     .search-and-filter-container {
         align-items: flex-end;
-        min-height: 150px;
         flex-direction: row;
-        width: 95vw;
-        left: 50%;
-        transform: translateX(-50%);
         justify-content: space-between;
+        left: 50%;
+        min-height: 150px;
         top: 70px;
+        transform: translateX(-50%);
+        width: 95vw;
         
     }
 }

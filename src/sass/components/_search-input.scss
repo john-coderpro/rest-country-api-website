@@ -3,29 +3,31 @@
 
 .search-input {
     @include flexy;
-    @include shaping(min(400px, 80vw), 50px);
+    @include shaping(80vw, 50px);
 
     background-color: var(--elements-bg-color);
-    padding-left: 10px;
     margin-bottom: 20px;
+    max-width: 400px;
+    padding-left: 10px;
 
     & > svg {
+        height: 24px;
         margin-left: 10px;
         width: 24px;
-        height: 24px;
     }
 
     & > label {
-        text-align: left;
-        width: min(250px,70vw);
         margin-left: 10px;
+        max-width: 250px;
+        text-align: left;
+        width: 70vw;
     }
 }
 
 @include media(medium) {
     .search-input {
-        margin-bottom: 0;
         align-self: auto;
+        margin-bottom: 0;
     }
 }
 

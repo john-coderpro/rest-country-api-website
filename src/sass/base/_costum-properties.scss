@@ -11,3 +11,7 @@
     --text-color: hsl(0 0% 100%);
     --input-text: hsl(0 0% 52%);
 }
+
+* {
+    transition: color 200ms ease;
+}

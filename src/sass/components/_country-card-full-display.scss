@@ -2,20 +2,23 @@
 @use '../base/costum-properties' as *;
 
 .flag-full {
-    width: min(500px, 90vw);
-    height: min(400px, 75vw);
+    height: 90vw;
     margin-bottom: 20px;
+    max-height: 400px;
+    max-width: 500px;
+    width: 90vw;
 }
 
 .country-card-full-display {
+    align-items: center;
     color: var(--text-color);
     display: flex;
-    margin-top: 150px;
-    width: min(500px, 90vw);
+    flex-direction: column;
     margin-left: auto;
     margin-right: auto;
-    align-items: center;
-    flex-direction: column;
+    margin-top: 150px;
+    max-width: 500px;
+    width: 90vw;
 }
 
 .info-container {
@@ -24,11 +27,11 @@
 }
 
 .infos {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
 }
 
 .infos > ul {
@@ -42,11 +45,9 @@ li {
 
 ul > li.country-name-text {
     font-size: 1.5rem;
-    margin-bottom: 30px;
     font-weight: 600;
+    margin-bottom: 30px;
 }
-
-
 
 .country-specs-title {
     font-size: 1rem;
@@ -61,10 +62,8 @@ ul > li.country-name-text {
 
 @include media(large) {
     .country-card-full-display {
-        width: 90%;
-        max-width: 1200px;
         justify-content: center;
-        align-items: center;
+        max-width: 1200px;
     }
 
     .info-container {
@@ -73,8 +72,8 @@ ul > li.country-name-text {
     }
 
     .infos {
-        flex-direction: row;
         align-items: center;
+        flex-direction: row;
         padding-bottom: 80px;
 
         & > ul:first-child {
@@ -84,17 +83,17 @@ ul > li.country-name-text {
     }
 
     .flag-full {
+        animation: animate-flag 500ms ease 1 normal backwards;
         margin-right: 20px;
-        animation: animate-flag 500ms ease  1 normal backwards;
     }
 
     .borders {
-        position: absolute;
         bottom: 60px;
         height: 50px;
+        position: absolute;
         width: 100%;
 
-        &>span {
+        & > span {
             display: inline-block;
         }
     }
@@ -102,14 +101,14 @@ ul > li.country-name-text {
 
 @keyframes animate-flag {
     from {
-        opacity: 0;
         filter: blur(10px);
+        opacity: 0;
         transform: translate(-3000px);
     }
 
     to {
-        opacity: 1;
         filter: blur(0);
+        opacity: 1;
         transform: translate(0);
     }
 }

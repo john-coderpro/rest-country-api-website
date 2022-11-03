@@ -12,8 +12,8 @@
     padding: 8px 16px;
 
     &:hover {
-        cursor: pointer;
         color: hsl(0, 0%, 50%);
+        cursor: pointer;
     }
 
     &:focus {
@@ -23,9 +23,9 @@
 
 .button--toggle-theme {
     svg {
-        width: 20px;
         height: 20px;
         margin-right: 10px;
+        width: 20px;
     }
 }
 
@@ -35,40 +35,40 @@
     background-color: var(--elements-bg-color);
 
     svg {
-        width: 16px;
         height: 16px;
         margin-left: 20px;
+        width: 16px;
     }
 }
 
 .button--select-region {
     box-sizing: border-box;
-    width: 100%;
-    text-align: left;
     padding: 3px 0;
     padding-left: 25px;
+    text-align: left;
+    width: 100%;
 }
 
 .button--back {
     align-self: flex-start;
-    margin-bottom: 50px;
     background-color: var(--elements-bg-color);
-    padding: 5px 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 50px;
+    padding: 5px 20px;
 
     svg {
-        width: 24px;
         height: 24px;
         margin-right: 10px;
+        width: 24px;
     }
 }
 
 .button--country {
-    margin-left: 5px;
-    margin-bottom: 10px;
     background-color: var(--elements-bg-color);
-    padding: 5px 20px;
     border-radius: 5px;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+    margin-left: 5px;
+    padding: 5px 20px;
 }
