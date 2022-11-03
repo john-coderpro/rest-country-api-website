@@ -4,8 +4,6 @@ import { storeData } from './store-country-data'
 import { helpers } from './helpers'
 
 
-
-
 const generateCardsProgressively = function* (
     countriesData,
     startingIndex = 0
@@ -144,6 +142,5 @@ const populateMain = function() {
 
 export {
     populateMain,
-    initApp,
     startObservation,
 }

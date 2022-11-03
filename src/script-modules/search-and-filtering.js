@@ -1,5 +1,4 @@
 import { helpers } from './helpers'
-import { initApp } from './populate-main'
 import { createCard } from './create-card'
 import {  startObservation} from './populate-main'
 
@@ -11,13 +10,19 @@ import {  startObservation} from './populate-main'
 // only and only if the user scrolls up to the last card
 
 const generateCardsProgressively = function* (countriesData, regionToDisplay) {
-
+    const searchInput = document.querySelector('input[type=search]')
+    const searchInputValue = searchInput.value.toLowerCase()
     const main = document.querySelector('.main')
     helpers.voidNode(main)
     let countCards = 0
     let i = 0
     while (i < countriesData.length) {
-        if ( countriesData[i].region === regionToDisplay) {
+        const countryNames = countriesData[i].translatedNames.toLowerCase()
+        if ( 
+            countriesData[i].region === regionToDisplay && 
+            countryNames.includes(searchInputValue)
+        ) 
+        {
             const card = createCard(countriesData[i])
             card.setAttribute('data-id', i)
             main.appendChild(card)
@@ -43,22 +48,24 @@ const filterCountriesByRegion = function () {
     const countries = JSON.parse(localStorage.getItem('data'))
     const generateMoreCards = generateCardsProgressively(countries, this.dataset.region)
     const currentLastCardIndex = generateMoreCards.next().value
-    const currentLastCard = document.querySelector(`.main > .country-card:nth-child(${currentLastCardIndex}`)
-    const intersectionObserverForCardAddition = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    startObservation(
-                        generateMoreCards,
-                        intersectionObserverForCardAddition,
-                        entry.target
-                    )
-                }
-            })
-        }
-    )
-    intersectionObserverForCardAddition.observe(currentLastCard)
-
+    if ( currentLastCardIndex) {
+        const currentLastCard = document.querySelector(`.main > .country-card:nth-child(${currentLastCardIndex}`)
+        const intersectionObserverForCardAddition = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        startObservation(
+                            generateMoreCards,
+                            intersectionObserverForCardAddition,
+                            entry.target
+                        )
+                    }
+                })
+            }
+        )
+        intersectionObserverForCardAddition.observe(currentLastCard)
+    }
+    
     this.classList.add('active')
 }
 
@@ -66,13 +73,31 @@ const filterCountriesByRegion = function () {
 const filterCountriesByName = function () {
     const countries = JSON.parse(localStorage.getItem('data'))
     const valueToSearchFor = this.value.toLowerCase()
-    if ( valueToSearchFor === '') initApp()
+    const currentlyActiveRegion = document.querySelector('.regions > .active')
+    if ( valueToSearchFor === '') {
+        document.querySelector('.button--filter-region').click()
+        currentlyActiveRegion.click()
+    } 
+        
+
     else {
         const main = document.querySelector('.main')
         helpers.voidNode(main)
         countries.forEach((elememt,index) => {
             const name = elememt.translatedNames.toLowerCase()
-            if (name.includes(valueToSearchFor)) {
+            if (
+                name.includes(valueToSearchFor) && 
+                currentlyActiveRegion.dataset.region === elememt.region
+            )
+            {
+                const card = createCard(elememt)
+                card.setAttribute('data-id', index)
+                main.appendChild(card)
+            }
+            if ( 
+                name.includes(valueToSearchFor) &&
+                currentlyActiveRegion.dataset.region === 'all'
+            ) {
                 const card = createCard(elememt)
                 card.setAttribute('data-id', index)
                 main.appendChild(card)
@@ -89,17 +114,7 @@ export const initSearchAndFiltering = function () {
     const displayAllCountriesBtn = document.querySelector(
         '.regions > *:first-child'
     )
-    displayAllCountriesBtn.addEventListener('click', () => {
-        document.querySelector('.button--filter-region').click()
-        const regions = document.querySelectorAll('.regions > *')
-        regions.forEach((region) => {
-            if (region.classList.contains('active')) {
-                region.classList.remove('active')
-            }
-        })
-        initApp()
-        displayAllCountriesBtn.classList.add('active')
-    })
+    
 
     regions.forEach((region) => {
         region.addEventListener('click', filterCountriesByRegion)
@@ -109,7 +124,18 @@ export const initSearchAndFiltering = function () {
         'input',
         helpers.debounce(filterCountriesByName, 500, searchInput)
     )
-
+    displayAllCountriesBtn.addEventListener('click', () => {
+        document.querySelector('.button--filter-region').click()
+        const regions = document.querySelectorAll('.regions > *')
+        regions.forEach((region) => {
+            if (region.classList.contains('active')) {
+                region.classList.remove('active')
+            }
+        })
+        const event = new Event('input', { bubbles: false, cancelable: true })
+        searchInput.dispatchEvent(event)
+        displayAllCountriesBtn.classList.add('active')
+    })
     const filterRegionBtn = document.querySelector('.button--filter-region')
     filterRegionBtn.addEventListener('click', function () {
         document.querySelector('.regions').classList.toggle('isclosed')
