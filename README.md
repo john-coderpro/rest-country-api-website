@@ -6,17 +6,13 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -38,7 +34,7 @@ Users should be able to:
 - [website live preview](https://john-coderpro.github.io/rest-country-api-website/)
 
 ## My process
-I took the time to analyze the design to find similarities and to tink about how I would structure my files, my main focus points were accessibility, performance and reusability.
+I took the time to analyze the design to find similarities and to think about how I would structure my files, my main focus points were accessibility, performance and reusability.
 
 ### Built with
 
@@ -48,13 +44,15 @@ I took the time to analyze the design to find similarities and to tink about how
 - CSS Grid
 - Mobile-first workflow
   For styles
-- vanilla javascript
+- javascript
+- webpack
 
 
 ### What I learned
 
 I reinforced my javascript array and object methods, I also learned about the debounce function, the localStorage and also learned a lot about how to make things accessible without breaking the design
 
+below is some code I'm proud of
 
 ```js
 const debounce = function(callbackFn, delay = 300, thisArg = null) {
@@ -69,29 +67,6 @@ const debounce = function(callbackFn, delay = 300, thisArg = null) {
             }, delay)
         }
     }
-```
-
-```js
-const storeData =  function storeCountriesData(data) {
-
-    const dataSimplifiedForm = data.reduce((simplifiedArray, element) => {
-        simplifiedArray.push({
-            name: element.name,
-            area: element.area,
-            tld: element.tld,
-            capital: element.capital,
-            flags: element.flags,
-            population: element.population,
-            region: element.region,
-            subregion: element.subregion,
-            currencies: element.currencies,
-            languages: element.languages,
-            borders: getBordersNames(element.borders, data),
-        })
-        return simplifiedArray
-    }, [])
-    sessionStorage.setItem('data', JSON.stringify(dataSimplifiedForm))
-}
 ```
 
 ### Continued development

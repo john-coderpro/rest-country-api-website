@@ -11,15 +11,24 @@
         "stylelint": "npx stylelint **/*.scss --fix"
     },
     "keywords": [],
-    "browserslist": [
-        "defaults and supports es6-module"
-    ],
-    "noImplicitAny": false,
+    "browserslist": {
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ],
+        "production": [
+            "chrome > 39"
+        ]
+    },
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@babel/core": "^7.19.6",
+        "@babel/preset-env": "^7.19.4",
         "@principalstudio/html-webpack-inject-preload": "^1.2.7",
         "autoprefixer": "^10.4.12",
+        "babel-loader": "^8.2.5",
         "browserlist": "^1.0.1",
         "clean-webpack-plugin": "^4.0.0",
         "css-loader": "^6.7.1",
@@ -31,6 +40,7 @@
         "mini-css-extract-plugin": "^2.6.1",
         "postcss-combine-duplicated-selectors": "^10.0.3",
         "postcss-loader": "^7.0.1",
+        "postcss-preset-env": "^7.8.2",
         "prettier": "2.7.1",
         "sass": "^1.55.0",
         "sass-loader": "^13.0.2",

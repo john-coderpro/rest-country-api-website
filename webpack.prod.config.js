@@ -20,7 +20,7 @@ module.exports = merge(common, {
             hash: true,
             meta: {
                 viewport: 'width=device-width, initial-scale=1.0',
-                description: 'an to search for countries\' informations',
+                description: 'an app to search for countries\' informations',
                 google: 'notranslate',
             },
         }),
@@ -59,6 +59,17 @@ module.exports = merge(common, {
                     'postcss-loader',
                     'sass-loader',
                 ],
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                        cacheDirectory: true,
+                    },
+                },
             },
         ],
     },
