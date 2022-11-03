@@ -1,6 +1,7 @@
 import { helpers } from './helpers'
 import { createCard } from './create-card'
 import {  startObservation} from './populate-main'
+import { initApp } from './populate-main'
 
 // the goal of this generator function is to avoid excessive dom size
 // its implementation here is different from the one found in the
@@ -75,8 +76,14 @@ const filterCountriesByName = function () {
     const valueToSearchFor = this.value.toLowerCase()
     const currentlyActiveRegion = document.querySelector('.regions > .active')
     if ( valueToSearchFor === '') {
-        document.querySelector('.button--filter-region').click()
-        currentlyActiveRegion.click()
+        if (currentlyActiveRegion.dataset.region === 'all') initApp()
+
+        else {
+            document.querySelector('.button--filter-region').click()
+            currentlyActiveRegion.click()
+        }
+
+        
     } 
         
 
@@ -85,8 +92,9 @@ const filterCountriesByName = function () {
         helpers.voidNode(main)
         countries.forEach((elememt,index) => {
             const name = elememt.translatedNames.toLowerCase()
+            
             if (
-                name.includes(valueToSearchFor) && 
+                name.includes(valueToSearchFor)  && 
                 currentlyActiveRegion.dataset.region === elememt.region
             )
             {
@@ -132,7 +140,7 @@ export const initSearchAndFiltering = function () {
                 region.classList.remove('active')
             }
         })
-        const event = new Event('input', { bubbles: false, cancelable: true })
+        const event = new Event('input', { bubbles: false, cancelable: false })
         searchInput.dispatchEvent(event)
         displayAllCountriesBtn.classList.add('active')
     })

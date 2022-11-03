@@ -142,5 +142,6 @@ const populateMain = function() {
 
 export {
     populateMain,
+    initApp,
     startObservation,
 }
