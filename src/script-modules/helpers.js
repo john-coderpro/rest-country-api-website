@@ -10,11 +10,11 @@ export const helpers = {
         
         let i = indexStart
         while( i < numLength) {
-            if ( result === '') {
+            if ( result === '') 
                 result = result.concat(`${numCopy.substring(i, i+3)}`)
-            } else {
+            else 
                 result = result.concat(`,${numCopy.substring(i, i+3)}`)
-            }
+            
             i += 3
         }
         return result
@@ -23,12 +23,16 @@ export const helpers = {
         let timeout
 
         return (...args) => {
-            if (timeout) {
-                clearTimeout(timeout)
-            }
+            if (timeout) clearTimeout(timeout)
+
             timeout = setTimeout(() => { callbackFn.apply(thisArg, args)
                 
             }, delay)
+        }
+    },
+    voidNode(node) {
+        while (node.firstElementChild) {
+            node.removeChild(node.firstElementChild)
         }
     }
 }
