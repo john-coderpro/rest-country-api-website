@@ -6,20 +6,7 @@
 // effect. the following regex will ensure that no class is added to
 // a card that already has an animation given to it with its
 // characteristics at its very first position when it enters
-// the browser viewport. however, this will also cause another issue
-// particualary if the user filter or search for coutries
-// and then display again all the country and starts scrolling.
-// since searching an filtering are managed by hiding cards
-// with the display of none , the layout is
-// recalculated and certains cards enter the viewport at a position
-// they actually wouldn't if the user would just scroll. they then receive
-// an animation which is fitting at that position.
-// because of that, if the user display all the countries again
-// and scroll, certain cards will not animate another time
-// because they would have received their animation during the
-// filtering or searching.
-// nevertheless , I will just leave like that because I
-// have not come up with a better solution yet.
+// the browser viewport.
 
 const animateOnScroll = function () {
     const hasAnimateClass = /animate-card-\d/g
@@ -60,7 +47,7 @@ const animateOnScroll = function () {
 }
 
 export const initAnimateOnScroll = function () {
-    const intersectionObserver = new IntersectionObserver(
+    const intersectionObserverForAnimation = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
                 animateOnScroll.call(entry)
@@ -78,14 +65,16 @@ export const initAnimateOnScroll = function () {
         mutations.forEach((mutation) => {
             if (
                 mutation.type === 'childList' &&
-                !prefersReducedMotion.matches
+                !prefersReducedMotion.matches &&
+                mutation.addedNodes.length
             ) {
                 const CurrentCard = mutation.target.querySelector(
                     `.country-card:nth-child(${nodeCount})`
                 )
-                intersectionObserver.observe(CurrentCard)
+                intersectionObserverForAnimation.observe(CurrentCard)
                 nodeCount++
-            }
+            } 
+            if (mutation.type === 'childList' && mutation.removedNodes.length) nodeCount--
         })
     })
 
