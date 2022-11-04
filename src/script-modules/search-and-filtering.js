@@ -15,6 +15,7 @@ const generateCardsProgressively = function* (countriesData, regionToDisplay) {
     const searchInputValue = searchInput.value.toLowerCase()
     const main = document.querySelector('.main')
     helpers.voidNode(main)
+    main.scroll(0,0)
     let countCards = 0
     let i = 0
     while (i < countriesData.length) {
@@ -75,6 +76,8 @@ const filterCountriesByName = function () {
     const countries = JSON.parse(localStorage.getItem('data'))
     const valueToSearchFor = this.value.toLowerCase()
     const currentlyActiveRegion = document.querySelector('.regions > .active')
+    const main = document.querySelector('.main')
+    main.scroll(0,0)
     if ( valueToSearchFor === '') {
         if (currentlyActiveRegion.dataset.region === 'all') initApp()
 
@@ -82,14 +85,13 @@ const filterCountriesByName = function () {
             document.querySelector('.button--filter-region').click()
             currentlyActiveRegion.click()
         }
-
         
     } 
         
-
     else {
         const main = document.querySelector('.main')
         helpers.voidNode(main)
+        main.scroll(0,0)
         countries.forEach((elememt,index) => {
             const name = elememt.translatedNames.toLowerCase()
             
@@ -102,7 +104,7 @@ const filterCountriesByName = function () {
                 card.setAttribute('data-id', index)
                 main.appendChild(card)
             }
-            if ( 
+            if (
                 name.includes(valueToSearchFor) &&
                 currentlyActiveRegion.dataset.region === 'all'
             ) {
@@ -122,8 +124,7 @@ export const initSearchAndFiltering = function () {
     const displayAllCountriesBtn = document.querySelector(
         '.regions > *:first-child'
     )
-    
-
+    const event = new Event('input', { bubbles: false, cancelable: false })
     regions.forEach((region) => {
         region.addEventListener('click', filterCountriesByRegion)
     })
@@ -140,7 +141,6 @@ export const initSearchAndFiltering = function () {
                 region.classList.remove('active')
             }
         })
-        const event = new Event('input', { bubbles: false, cancelable: false })
         searchInput.dispatchEvent(event)
         displayAllCountriesBtn.classList.add('active')
     })

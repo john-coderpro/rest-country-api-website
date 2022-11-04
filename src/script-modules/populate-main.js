@@ -114,6 +114,7 @@ const initApp = async function() {
     }  else {
         const main = document.querySelector('.main')
         helpers.voidNode(main)
+        main.scroll(0,0)
         generateMoreCards = generateCardsProgressively(
             JSON.parse(localStorage.getItem('data'))
         )

@@ -6,16 +6,12 @@ import { initSearchAndFiltering} from './script-modules/search-and-filtering'
 import { initAnimateOnScroll} from './script-modules/animate-on-scroll'
 import { initThemeToggling} from './script-modules/theme-toggle'
 
-const media = window.matchMedia('min-width: 1100px')
 
 populateMain()
-
-if (media.matches) initGopherAnimation()
-
 initAnimateOnScroll()
 initSearchAndFiltering()
 initThemeToggling()
 initStyleInputOnFocus()
-
+initGopherAnimation()
 
 
