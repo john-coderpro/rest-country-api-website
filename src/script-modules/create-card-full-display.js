@@ -5,7 +5,7 @@ const getHtmlTextForBorders = function (arrayOfBorders) {
     return arrayOfBorders.reduce(
         (finalText, currentBorder) =>
             finalText.concat(
-                `<button data-name=${currentBorder} class='button button--country'>${currentBorder}</button>`
+                `<button data-name='${currentBorder}' class='button button--country'>${currentBorder}</button>`
             ),
         ''
     )
