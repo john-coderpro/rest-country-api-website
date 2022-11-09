@@ -1,48 +1,23 @@
-// because the animateOnScroll function is invocated
-// in an intersection observer,
-// the value of the distance to the left side changes frequently
-// during the animation, multiple classes are then added to the
-//  card as it moves to its primary position and it creates a bad
-// effect. the following regex will ensure that no class is added to
-// a card that already has an animation given to it with its
-// characteristics at its very first position when it enters
-// the browser viewport.
-
 const animateOnScroll = function () {
-    const hasAnimateClass = /animate-card-\d/g
     const distanceToScreenLeftSide =
         this.boundingClientRect.left + this.boundingClientRect.width
         
     if (distanceToScreenLeftSide > 1100) {
-        if (this.isIntersecting) {
-            this.target.classList.add('animate-card-0')
-        }
+        this.target.classList.add('animate-card-0')
+        return
     }
     if (distanceToScreenLeftSide < 1100 && distanceToScreenLeftSide > 850) {
-        if (
-            this.isIntersecting &&
-            !hasAnimateClass.test(this.target.className)
-        ) {
-            this.target.classList.add('animate-card-1')
-        }
+        this.target.classList.add('animate-card-1')
+        return
     }
 
     if (distanceToScreenLeftSide < 850 && distanceToScreenLeftSide > 550) {
-        if (
-            this.isIntersecting &&
-            !hasAnimateClass.test(this.target.className)
-        ) {
-            this.target.classList.add('animate-card-2')
-        }
+        this.target.classList.add('animate-card-2')
+        return 
     }
 
     if (distanceToScreenLeftSide < 550) {
-        if (
-            this.isIntersecting &&
-            !hasAnimateClass.test(this.target.className)
-        ) {
-            this.target.classList.add('animate-card-3')
-        }
+        this.target.classList.add('animate-card-3')
     }
 }
 
@@ -50,12 +25,16 @@ export const initAnimateOnScroll = function () {
     const intersectionObserverForAnimation = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
-                animateOnScroll.call(entry)
+                if (entry.isIntersecting) {
+                    animateOnScroll.call(entry)
+                    intersectionObserverForAnimation.unobserve(entry.target)
+                }
+                    
             })
         },
         {
             root: null,
-            threshold: 0.25,
+            threshold: 0.15,
         }
     )
 
