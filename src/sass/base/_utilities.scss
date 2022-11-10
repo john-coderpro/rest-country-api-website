@@ -64,7 +64,11 @@
     0% {
         filter: blur(10px);
         opacity: 0;
-        transform: translateX(-3000px);
+        transform: translateX(-500px);
+    }
+
+    30% {
+        opacity: 0;
     }
 
     100% {
