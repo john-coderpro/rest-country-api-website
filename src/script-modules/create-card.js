@@ -18,7 +18,7 @@ const createCard = function createCountryCard(objetData) {
     const populattion = helpers.makeNumberLegible(objetData.population)
     card.innerHTML = `
                             <img src=${objetData.flags.svg} class='flag' alt='${objetData.name.common} flag'>
-                            <ul aria-label='country details'>
+                            <ul>
                                 <li class=country-name-text>${objetData.name.common}</li>
                                 <li>
                                     <span class=country-specs-title>population:</span>
